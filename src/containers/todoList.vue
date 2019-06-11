@@ -48,11 +48,13 @@ export default {
   methods: {
     ...mapActions(['createData', 'viewFilter']),
     creatData() {
-      this.createData({
-        value: this.createInput,
-        completed: 'unCompleted'
-      });
-      this.createInput = '';
+      if( this.createInput) {
+        this.createData({
+          value: this.createInput,
+          completed: 'unCompleted'
+        });
+        this.createInput = '';
+      }
     },
     onChangeView(value) {
       this.viewFilter({

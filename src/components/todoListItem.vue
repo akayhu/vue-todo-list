@@ -37,7 +37,7 @@ export default {
     return {
       isSelect: false,
       inputValue: this.item.value,
-      checked: false
+      checked: (this.item.completed === 'completed') ? true : false
     }
   },
   methods: {
