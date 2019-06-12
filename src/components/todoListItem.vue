@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bbb">
     <input
       type="checkbox"
       v-model="checked"
@@ -67,6 +67,12 @@ export default {
   },
   props: {
     item: Object
+  },
+  watch: {
+    inputValue: (newValue, oldValue) => {
+      console.log('newValue', newValue);
+      console.log('oldValue', oldValue);
+    }
   }
 }
 </script>

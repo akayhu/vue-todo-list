@@ -59,8 +59,13 @@ export const mutations = {
   }
 };
 
+export const getters = {
+  getViewFilter: state => state.viewFilter
+}
+
 export default {
   state,
   actions,
-  mutations
+  mutations,
+  getters
 };

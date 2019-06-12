@@ -11,19 +11,24 @@
       <button class="show-all" @click="onChangeView('all')">顯示全部</button>
       <button class="show-selected" @click="onChangeView('completed')">顯示已選取</button>
       <button class="show-notSelected" @click="onChangeView('unCompleted')">顯示未選取</button>
+      <span class="display-view-state">顯示狀態：{{ nowFilter }}</span>
     </div>
     <hr />
-    <p
-      is="todoListItem"
-      v-for="item in viewFilterData"
-      :key="item.id"
-      :item="item"
-    />
+    <template v-for="(item, index) in viewFilterData">
+      <div
+        is="todoListItem"
+        :key="item.id"
+        :item="item"
+        :index="index"
+        class="aaa"
+      >
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import todoListItem from '@/components/todoListItem.vue'
 
 export default {
@@ -34,6 +39,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getViewFilter']),
     listData: function() {
       return this.$store.state.todoList.todoListData
     },
@@ -43,6 +49,9 @@ export default {
       return todoListData.filter(items =>
         showFilter === 'all' ? true : items.completed === showFilter
       );
+    },
+    nowFilter: function() {
+      return this.getViewFilter
     }
   },
   methods: {
@@ -102,5 +111,9 @@ export default {
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+}
+.display-view-state {
+  font-size: 14px;
+  margin-left: 15px;
 }
 </style>
