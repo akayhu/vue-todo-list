@@ -2,7 +2,7 @@
   <div class="bbb">
     <input
       type="checkbox"
-      v-model="checked"
+      v-model="checkedStatus"
       @change="onSelect"
     />
     <span
@@ -35,13 +35,17 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+      id: this.item.id,
       isSelect: false,
-      inputValue: this.item.value,
-      checked: (this.item.completed === 'completed') ? true : false
+      inputValue: this.item.value
     }
   },
   methods: {
-    ...mapActions(['editData', 'deleteData', 'selectData']),
+    ...mapActions([
+      'editData',
+      'deleteData',
+      'selectData'
+    ]),
     edit() {
       this.isSelect = true
     },
@@ -63,6 +67,16 @@ export default {
       this.selectData({
         id: this.item.id
       })
+    }
+  },
+  computed: {
+    checkedStatus: {
+      get() {
+        return (this.item.completed === 'completed') ? true : false;
+      },
+      set(value) {
+        return value;
+      }
     }
   },
   props: {

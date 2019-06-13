@@ -3,6 +3,8 @@ export const EDIT_DATA = 'EDIT_DATA';
 export const DELETE_DATA = 'DELETE_DATA';
 export const SELECT_DATA = 'SELECT_DATA';
 export const VIEW_FILTER = 'VIEW_FILTER';
+export const ALL_SELECT = 'ALL_SELECT';
+export const CANCEL_SELECT = 'CANCEL_SELECT';
 
 export const state = {
   todoListData: [],
@@ -25,6 +27,12 @@ export const actions = {
   viewFilter ({commit}, payload) {
     commit(VIEW_FILTER, payload);
   },
+  allSelect ({commit}) {
+    commit(ALL_SELECT);
+  },
+  cancelSelect ({commit}) {
+    commit(CANCEL_SELECT);
+  }
 };
 
 let index = 0;
@@ -56,12 +64,26 @@ export const mutations = {
   },
   [VIEW_FILTER] (state, payload) {
     state.viewFilter = payload.value
+  },
+  [ALL_SELECT] (state) {
+    state.todoListData.map(todoItem => todoItem.completed = 'completed');
+  },
+  [CANCEL_SELECT] (state){
+    state.todoListData.map(todoItem => todoItem.completed = 'unCompleted')
   }
 };
 
 export const getters = {
-  getViewFilter: state => state.viewFilter
-}
+  getListData: state => state.todoListData,
+  getViewFilter: state => state.viewFilter,
+  getViewFilterData: (state, getters) => {
+    const todoListData = getters.getListData;
+    const showFilter = getters.getViewFilter;
+    return todoListData.filter(items =>
+      showFilter === 'all' ? true : items.completed === showFilter
+    );
+  }
+};
 
 export default {
   state,
