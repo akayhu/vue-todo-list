@@ -83,7 +83,7 @@ export default {
       'cancelSelect'
     ]),
     creatData() {
-      if(this.createInput) {
+      if (this.createInput) {
         this.createData({
           value: this.createInput,
           completed: 'unCompleted'
@@ -120,14 +120,14 @@ export default {
 .all-select {
   color: #000;
   background-color: greenyellow;
-  border: 1px solid #ccc;
+  border: 1px solid greenyellow;
   border-radius: 5px;
   padding: 5px 10px;
 }
 .cancel-select {
   color: #fff;
   background-color: red;
-  border: 1px solid #ccc;
+  border: 1px solid red;
   border-radius: 5px;
   padding: 5px 10px;
 }
