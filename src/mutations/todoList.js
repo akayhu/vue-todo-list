@@ -68,8 +68,8 @@ export const mutations = {
   [ALL_SELECT] (state) {
     state.todoListData.map(todoItem => todoItem.completed = 'completed');
   },
-  [CANCEL_SELECT] (state){
-    state.todoListData.map(todoItem => todoItem.completed = 'unCompleted')
+  [CANCEL_SELECT] (state) {
+    state.todoListData.map(todoItem => todoItem.completed = 'unCompleted');
   }
 };
 

@@ -51,11 +51,12 @@ export default {
       this.isSelect = true;
     },
     present() {
+      const { completed, id } = this.item;
       this.isSelect = false;
-      if (this.inputValueIsNullValue && this.item.completed === 'completed') {
-        this.onChange(this.item.id, this.inputOldValue);
-      } else if (this.inputValueIsNullValue && this.item.completed === 'unCompleted') {
-        this.deleteData({ id: this.item.id });
+      if (this.inputValueIsNullValue && completed === 'completed') {
+        this.onChange(id, this.inputOldValue);
+      } else if (this.inputValueIsNullValue && completed === 'unCompleted') {
+        this.deleteData({ id: id });
       }
     },
     deleteD() {
