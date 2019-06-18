@@ -7,15 +7,19 @@
     />
     <span
       v-if="!isSelect"
-      class="item-value"
-      :style="{
-        'textDecoration': item.completed === 'completed' ? 'line-through' : 'none',
-        'color': item.completed === 'completed' ? 'blue' : '#000'
-      }"
+      :class="['item-value', {
+        'isCompleted': item.completed === 'completed',
+        'unCompleted': item.completed === 'unCompleted'
+      }]"
       @click="edit"
     >
       {{ item.value }}
-      <button class="edit-button" @click="edit">編輯</button>
+      <button 
+        class="edit-button"
+        @click="edit"
+      >
+        編輯
+      </button>
     </span>
     <span v-if="isSelect">
       <input
@@ -23,8 +27,18 @@
         v-model="inputValue"
         v-on:blur="present"
       />
-      <button @click="present" class="can-button">取消編修</button>
-      <button @click="deleteD" class="del-button">刪除</button>
+      <button
+        @click="present"
+        class="can-button"
+      >
+        取消編修
+      </button>
+      <button
+        @click="deleteD"
+        class="del-button"
+      >
+        刪除
+      </button>
     </span>
   </div>
 </template>
@@ -146,6 +160,14 @@ export default {
   border-radius: 5px;
   border: 0;
   cursor: pointer;
+}
+.isCompleted {
+  text-decoration: line-through;
+  color: blue;
+}
+.unCompleted {
+  text-decoration: none;
+  color: #000;
 }
 </style>
 

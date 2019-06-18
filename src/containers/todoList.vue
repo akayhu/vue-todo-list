@@ -8,13 +8,38 @@
       v-on:keyup.enter="creatData"
     />
     <div class="select-button">
-      <button class="all-select" @click="allSelect()">全部選取</button>
-      <button class="cancel-select" @click="cancelSelect()">全部取消選取</button>
+      <button
+        class="all-select"
+        @click="allSelect()"
+      >
+        全部選取
+      </button>
+      <button
+        class="cancel-select"
+        @click="cancelSelect()"
+      >
+        全部取消選取
+      </button>
     </div>
     <div>
-      <button class="show-all" @click="onChangeView('all')">顯示全部</button>
-      <button class="show-selected" @click="onChangeView('completed')">顯示已選取</button>
-      <button class="show-notSelected" @click="onChangeView('unCompleted')">顯示未選取</button>
+      <button
+        class="show-all"
+        @click="onChangeView('all')"
+      >
+        顯示全部
+      </button>
+      <button
+        class="show-selected"
+        @click="onChangeView('completed')"
+      >
+        顯示已選取
+      </button>
+      <button
+        class="show-notSelected" 
+        @click="onChangeView('unCompleted')"
+      >
+        顯示未選取
+      </button>
       <span class="display-view-state">顯示狀態：{{ getViewFilter }}</span>
     </div>
     <hr />
@@ -42,10 +67,10 @@
               <td>{{ item.id }}</td>
               <td>{{ item.value }}</td>
               <td
-                :style="{
-                  'background-color': item.completed === 'completed' ? 'greenyellow' : 'red',
-                  'color': item.completed === 'completed' ? '#000' : '#fff'
-                }"
+                :class="[{
+                  'itemIsCompleted': item.completed === 'completed',
+                  'itemUnCompleted': item.completed === 'unCompleted'
+                }]"
               >
                 {{ item.completed === 'completed' ? '選取' : '未選取' }}
               </td>
@@ -61,7 +86,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import todoListItem from '@/components/todoListItem.vue'
 
-export default {
+const vm = {
   name: 'TodoList',
   data() {
     return {
@@ -73,7 +98,7 @@ export default {
       'getListData',
       'getViewFilter',
       'getViewFilterData'
-    ]),
+    ])
   },
   methods: {
     ...mapActions([
@@ -101,6 +126,8 @@ export default {
     todoListItem
   }
 }
+
+export default vm;
 </script>
 
 <style>
@@ -185,5 +212,13 @@ export default {
 .right-main table tr:nth-child(1) td:nth-child(2),
 .right-main table tr:nth-child(1) td:nth-child(3) {
   text-align: center;
+}
+.itemIsCompleted {
+  background-color: greenyellow;
+  color: #000;
+}
+.itemUnCompleted {
+  background-color: red;
+  color: #fff;
 }
 </style>
