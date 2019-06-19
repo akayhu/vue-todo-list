@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <nav class="">
+    <nav>
       Vue 練習：
       <ul>
-        <li><router-link :to="{path: '/'}">Vue首頁</router-link></li>
+        <li><router-link :to="{path: '/'}">Vue 首頁</router-link></li>
         <li><router-link :to="{path: '/todoList'}">Todo List</router-link></li>
+        <li><router-link :to="{path: '/movie'}">Movie</router-link></li>
       </ul>
     </nav>
     <router-view/>
